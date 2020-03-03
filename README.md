@@ -1,6 +1,6 @@
-# **VuepressBlogTemplate**
+# TypeScript-start
 
-多页面管理
+TypeScript 学习笔记 http://sogrey.github.io/TypeScript-start/
 
 转pdf(需要python支持)：
 
