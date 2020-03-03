@@ -1,0 +1,31 @@
+{
+  "name": "vuepress_blog_template",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vuepress dev source",
+    "build": "vuepress build source --dest docs",
+    "deploy": "npm run build & cd docs/ & git init & git add -A & git commit -m 'deploy' & git push -f https://github.com/Sogrey/VuepressBlogTemplate.git master:gh-pages",
+    "outpdf": "cd vuepress2pdf & python vuepress2pdf.py",
+    "pipInstall": "pip install requests & pip install beautifulsoup4 & pip install pdfkit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sogrey/VuepressBlogTemplate.git"
+  },
+  "author": "Sogrey",
+  "license": "MIT",
+  "dependencies": {
+    "vuepress": "^0.14.11"
+  },
+  "devDependencies": {
+    "lodash.template": ">=4.5.0",
+    "lodash": ">=4.17.13",
+    "braces": ">=2.3.1",
+    "serialize-javascript": ">=2.1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Sogrey/VuepressBlogTemplate/issues"
+  },
+  "homepage": "https://github.com/Sogrey/VuepressBlogTemplate#readme"
+}
