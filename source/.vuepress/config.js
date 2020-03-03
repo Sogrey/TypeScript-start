@@ -2,7 +2,7 @@ module.exports = {
   port: "3000",
   dest: "docs",
   ga: "UA-85414008-1",
-  base: "/VuepressBlogTemplate/",
+  base: "/TypeScript-start/",
   markdown: {
     externalLinks: {
       target: '_blank',
@@ -24,12 +24,12 @@ module.exports = {
   head: [
     ["link", {
       rel: "icon",
-      href: `/favicon.ico`
+      href: "/favicon.ico"
     }]
   ],
   themeConfig: {
-    repo: "Sogrey/VuepressBlogTemplate",
-    docsRepo: "Sogrey/VuepressBlogTemplate",
+    repo: "Sogrey/TypeScript-start",
+    docsRepo: "Sogrey/TypeScript-start",
     editLinks: true,
     docsDir: 'source',
     locales: {
@@ -118,7 +118,7 @@ function genGuideSidebar(isZh) {
       collapsable: false,
       children: ["generator"]
     }
-  ]
+  ];
 }
 
 function genConfigSidebar(isZh) {
@@ -126,5 +126,5 @@ function genConfigSidebar(isZh) {
     title: isZh ? "配置" : "Config",
     collapsable: false,
     children: [""]
-  }]
+  }];
 }
