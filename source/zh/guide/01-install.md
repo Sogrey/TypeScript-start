@@ -7,6 +7,7 @@ sidebarDepth: 5
 ## 安装
 
 基于node.js安装（前提安装[node.js](https://nodejs.org/)）
+
 ``` bash
 npm install -g typescript
 ```
@@ -14,7 +15,6 @@ npm install -g typescript
 ## 编译
 
 新建一个`helloworld.ts`文件，同级目录下命令行执行：
-
 ``` bash
 tsc helloworld.ts
 ```
@@ -33,6 +33,7 @@ tsc helloworld.ts
 ``` bash
 tsc --init
 ```
+
 生成配置文件：
 
 ``` json

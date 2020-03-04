@@ -1,5 +1,5 @@
 {
-  "name": "typeScript_start",
+  "name": "typescript_start",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "start": "npm run dev",
     "build": "vuepress build source --dest docs",
     "deploy": "bash deploy.sh",
-    "deploy1": "npm run build & cd docs/ & git init & git add -A & git commit -m 'deploy' & git push -f https://github.com/Sogrey/TypeScript-start.git master:gh-pages",
+    "deploy1": "git init & git add -A & git commit -m 'deploy master' & git push -f https://github.com/Sogrey/TypeScript-start.git master & npm run build & cd docs/ & git init & git add -A & git commit -m 'deploy' & git push -f https://github.com/Sogrey/TypeScript-start.git master:gh-pages",
     "outpdf": "cd vuepress2pdf & python vuepress2pdf.py",
     "pipInstall": "pip install requests & pip install beautifulsoup4 & pip install pdfkit"
   },
