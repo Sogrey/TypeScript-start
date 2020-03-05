@@ -20,7 +20,7 @@ tsc helloworld.ts
 ```
 完成后就会在同级目录生成同名JS文件`helloworld.js`。
 
-开发项目级应用每次都`tsc`进行编译，显然很不方便。下面就需要对项目进行简答配置。
+开发项目级应用每次都`tsc`进行编译，显然很不方便。下面就需要对项目进行简单配置。
 
 ## 开发工具及配置
 
@@ -34,8 +34,9 @@ tsc helloworld.ts
 tsc --init
 ```
 
-生成配置文件：
-
+生成[配置文件](https://github.com/Sogrey/TypeScript-start/blob/master/examples/tsconfig.json).
+<details>
+<summary>点击查看配置文件</summary>
 ``` json
 {
   "compilerOptions": {
@@ -104,6 +105,7 @@ tsc --init
   }
 }
 ```
+</details>
 
 我们放开注释`outDir`设置编译输出目录。
 
@@ -144,7 +146,7 @@ rosoft.com/fwlink/?LinkID=135170 中的 about_Execution_Policies。
 
 ## 第一个TypeScript应用-Helloworld
 
-创建一个`helloworld.html`文件，输入`html:5`回车 快捷生成一个简单页面。
+创建一个[helloworld.html](https://github.com/Sogrey/TypeScript-start/blob/master/examples/helloworld.html)文件，输入`html:5`回车 快捷生成一个简单页面。
 ``` html
 <!DOCTYPE html>
 <html lang="en">
@@ -162,14 +164,19 @@ rosoft.com/fwlink/?LinkID=135170 中的 about_Execution_Policies。
 ``` html
 <script src="helloworld.js" type="text/javascript"></script>
 ```
-helloworld.ts 
+[helloworld.ts](https://github.com/Sogrey/TypeScript-start/blob/master/examples/helloworld.ts)
 ``` ts
 console.log('hello TypeScript!');
 
 var hello:string = 'hello 你好';
 
 document.writeln(hello);
-
 ```
-
-即可看到输出结果，修改`.ts`文件，页面也即是响应更新。
+即可看到输出结果,生成[对应js文件](https://github.com/Sogrey/TypeScript-start/blob/master/examples/helloworld.js):
+``` js
+"use strict";
+console.log('hello TypeScript!');
+var hello = 'hello 你好';
+document.writeln(hello);
+```
+修改`.ts`文件，页面也即是响应更新。

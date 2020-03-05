@@ -137,7 +137,9 @@ function genGuideSidebar(isZh) {
       title: "TypeScript基础",
       collapsable: true,
       children: [
-        "02-data-type"/*基础数据类型 */
+        "02-data-type",/*基础数据类型 */
+        "03-function",/*函数 */
+        "04-class",/*类 */
       ]
     }
   ];
