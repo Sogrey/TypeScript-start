@@ -140,6 +140,7 @@ function genGuideSidebar(isZh) {
         "02-data-type",/*基础数据类型 */
         "03-function",/*函数 */
         "04-class",/*类 */
+        "05-interface",/*接口 */
       ]
     }
   ];
