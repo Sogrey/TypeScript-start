@@ -2,7 +2,7 @@
 sidebarDepth: 5
 ---
 
-# TypeScript 安装
+# 01 TypeScript 安装
 
 ## 安装
 

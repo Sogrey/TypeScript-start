@@ -156,3 +156,33 @@ var cattle = new Cattle('Beitina');
 cattle.eat();//Beitina eat grass.
 
 // 接口扩展
+
+interface Animal1 {
+    eat(): void;
+}
+interface Person1 extends Animal1 {
+    work(): void;
+}
+class Programmer {
+    name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    coding(code: string) {
+        console.log(`在编程：${code}`);
+    }
+}
+class Adult extends Programmer implements Person1 {
+    eat() {
+        console.log(`要吃饭`);
+    }
+    work() {
+        console.log(`要工作`);
+    }
+}
+
+var adult = new Adult(`Sogrey`);
+adult.work();//要工作
+adult.eat();//要吃饭
+adult.coding(`TypeScript`);//在编程：TypeScript

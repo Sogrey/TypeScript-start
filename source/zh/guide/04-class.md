@@ -2,7 +2,7 @@
 sidebarDepth: 5
 ---
 
-# TypeScript中的类
+# 04 TypeScript中的类
 
 ## ES5中的类
 ``` js

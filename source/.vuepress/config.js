@@ -141,6 +141,8 @@ function genGuideSidebar(isZh) {
         "03-function",/*函数 */
         "04-class",/*类 */
         "05-interface",/*接口 */
+        "06-genericity",/*泛型*/
+        
       ]
     }
   ];

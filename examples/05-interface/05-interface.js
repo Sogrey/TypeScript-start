@@ -1,6 +1,19 @@
 "use strict";
 //接口的作用
 // ..
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 // 属性接口
 //json约束
 function printLabel(labelledObj) {
@@ -76,4 +89,29 @@ var Cattle = /** @class */ (function () {
 }());
 var cattle = new Cattle('Beitina');
 cattle.eat(); //Beitina eat grass.
-// 接口扩展
+var Programmer = /** @class */ (function () {
+    function Programmer(name) {
+        this.name = name;
+    }
+    Programmer.prototype.coding = function (code) {
+        console.log("\u5728\u7F16\u7A0B\uFF1A" + code);
+    };
+    return Programmer;
+}());
+var Adult = /** @class */ (function (_super) {
+    __extends(Adult, _super);
+    function Adult() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Adult.prototype.eat = function () {
+        console.log("\u8981\u5403\u996D");
+    };
+    Adult.prototype.work = function () {
+        console.log("\u8981\u5DE5\u4F5C");
+    };
+    return Adult;
+}(Programmer));
+var adult = new Adult("Sogrey");
+adult.work(); //要工作
+adult.eat(); //要吃饭
+adult.coding("TypeScript"); //在编程：TypeScript

@@ -2,7 +2,7 @@
 sidebarDepth: 5
 ---
 
-# TypeScript中的接口
+# 05 TypeScript中的接口
 
 ## 接口的作用
 
@@ -198,4 +198,56 @@ cattle.eat();//Beitina eat grass.
 定义类`Cattle`必须要有`name`属性和`eat`方法，这是接口`Animals`规定的，但是`eat`方法没有传参`str`也没有报错。
 
 ## 接口扩展
-//TODO
+
+接口可以继承接口。
+
+``` ts
+interface Animal1 {
+    eat():void;
+}
+interface Person1 extends Animal1{
+    work():void;
+}
+
+class Adult implements Person1{
+    eat(){
+        console.log(`要吃饭`);
+    }
+    work(){
+        console.log(`要工作`);
+    }
+}
+
+var adult = new Adult();
+adult.work();//要工作
+adult.eat();//要吃饭
+```
+以上例子中接口`Person1`继承自`Animal1`,类`Adult`实现接口`Person1`，则要全部实现接口`Person1`以及接口`Animal1`中所有的方法。
+
+再扩展：
+``` ts
+class Programmer {
+    name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    coding(code: string) {
+        console.log(`在编程：${code}`);
+    }
+}
+class Adult extends Programmer implements Person1 {
+    eat() {
+        console.log(`要吃饭`);
+    }
+    work() {
+        console.log(`要工作`);
+    }
+}
+
+var adult = new Adult(`Sogrey`);
+adult.work();//要工作
+adult.eat();//要吃饭
+adult.coding(`TypeScript`);//在编程：TypeScript
+```
+这次类`Adult`继承自父类`Programmer`，并且要实现接口`Person1`。

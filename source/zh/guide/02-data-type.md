@@ -2,7 +2,7 @@
 sidebarDepth: 5
 ---
 
-# TypeScript 基础数据类型
+# 02 TypeScript 基础数据类型
 
 ::: tip TypeScript是强类型语言
 

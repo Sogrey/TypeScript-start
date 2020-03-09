@@ -2,7 +2,7 @@
 sidebarDepth: 5
 ---
 
-# TypeScript 函数
+# 03 TypeScript 函数
 
 ## 函数的定义
 ES5中：
