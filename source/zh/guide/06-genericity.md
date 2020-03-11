@@ -142,3 +142,78 @@ var myGetPackingDataValue:PackingClass<string> = getPackingDataValue;
 // console.log(myGetPackingDataValue(123));//报错 类型“123”的参数不能赋给类型“string”的参数。
 console.log(myGetPackingDataValue("加油中国"));//加油中国
 ```
+
+## 泛型类作为参数
+举例用户信息入库：
+``` ts
+class User {
+    userName: string | undefined;
+    password: string | undefined;
+}
+class MySqlDb {
+    add(user: User): Boolean {
+        console.log(user);
+        // 插入数据库操作等...
+        // ...
+        return true;
+    }
+}
+
+var u = new User();
+u.userName = `Sogrey`;
+u.password = `123456`;
+
+var db = new MySqlDb();
+console.log(db.add(u));
+```
+使用泛型封装：
+``` ts
+
+class User {
+    userName: string | undefined;
+    password: string | undefined;
+}
+class News {
+    title: string | undefined;
+    date: string | undefined;
+    desc: string | undefined;
+    pics: string[] | undefined;
+    constructor(params: {
+        title: string | undefined,
+        date: string | undefined,
+        desc: string | undefined,
+        pics?: string[] | undefined//可选参数
+    }) {
+        this.title = params.title;
+        this.date = params.date;
+        this.desc = params.desc;
+        this.pics = params.pics;
+    }
+}
+class MySqlDb<T> {
+    add(t: T): Boolean {
+        console.log(t);
+        // 插入数据库操作等...
+        // ...
+        return true;
+    }
+}
+
+var u = new User();
+u.userName = `Sogrey`;
+u.password = `123456`;
+
+var db = new MySqlDb<User>();// 校验User类型
+console.log(db.add(u));//true
+//User {userName: "Sogrey", password: "123456"}
+// db.add("123");//报错 类型“"123"”的参数不能赋给类型“User”的参数。
+
+var n = new News({
+    title: "武汉疫情已得到全面控制",
+    date: "2020-03-11",
+    desc: "正文内容..."
+});
+var dbNews = new MySqlDb<News>();// 校验News类型
+console.log(dbNews.add(n));//true
+//News {title: "武汉疫情已得到全面控制", date: "2020-03-11", desc: "正文内容...", pics: undefined}
+```

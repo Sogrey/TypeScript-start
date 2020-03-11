@@ -142,6 +142,8 @@ function genGuideSidebar(isZh) {
         "04-class",/*类 */
         "05-interface",/*接口 */
         "06-genericity",/*泛型*/
+        "07-modules",/*模块化*/
+        "08-namespace",/*命名空间*/
         
       ]
     }
