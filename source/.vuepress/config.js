@@ -144,7 +144,7 @@ function genGuideSidebar(isZh) {
         "06-genericity",/*泛型*/
         "07-modules",/*模块化*/
         "08-namespace",/*命名空间*/
-        
+        "09-Decorator",/*装饰器*/
       ]
     }
   ];
