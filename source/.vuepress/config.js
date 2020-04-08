@@ -146,6 +146,13 @@ function genGuideSidebar(isZh) {
         "08-namespace",/*命名空间*/
         "09-Decorator",/*装饰器*/
       ]
+    },
+    {
+      title: "其他",
+      collapsable: true,
+      children: [
+        "other-tutorial",/*其他学习库 */
+      ]
     }
   ];
 }
