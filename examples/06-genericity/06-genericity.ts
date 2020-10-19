@@ -198,6 +198,7 @@ var n = new News({
     date: "2020-03-11",
     desc: "正文内容..."
 });
+
 var dbNews = new MySqlDb<News>();// 校验User类型
 console.log(dbNews.add(n));//true
 //News {title: "武汉疫情已得到全面控制", date: "2020-03-11", desc: "正文内容...", pics: undefined}
