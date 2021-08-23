@@ -18,15 +18,15 @@
   "author": "Sogrey",
   "license": "MIT",
   "dependencies": {
-    "vuepress": "^1.1.0"
+    "vuepress": "^1.8.2"
   },
   "devDependencies": {
+    "braces": ">=3.0.2",
+    "kind-of": ">=6.0.3",
+    "lodash": ">=4.17.21",
     "lodash.template": ">=4.5.0",
-    "lodash": ">=4.17.19",
-    "braces": ">=2.3.1",
-    "serialize-javascript": ">=3.1.0",
-    "minimist": ">=1.2.3",
-    "kind-of": ">=6.0.3"
+    "minimist": ">=1.2.5",
+    "serialize-javascript": ">=6.0.0"
   },
   "bugs": {
     "url": "https://github.com/Sogrey/TypeScript-start/issues"
