@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>09 装饰器 | TypeScript-start</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/TypeScript-start/favicon.ico">
+    <meta name="description" content="TypeScript 学习入门">
+    
+    <link rel="preload" href="/TypeScript-start/assets/css/0.styles.eec4ae75.css" as="style"><link rel="preload" href="/TypeScript-start/assets/js/app.2929ee68.js" as="script"><link rel="preload" href="/TypeScript-start/assets/js/2.b792d9f1.js" as="script"><link rel="preload" href="/TypeScript-start/assets/js/24.4ffa99ee.js" as="script"><link rel="prefetch" href="/TypeScript-start/assets/js/10.37ad1536.js"><link rel="prefetch" href="/TypeScript-start/assets/js/11.f77e7191.js"><link rel="prefetch" href="/TypeScript-start/assets/js/12.e550f30d.js"><link rel="prefetch" href="/TypeScript-start/assets/js/13.f19fce18.js"><link rel="prefetch" href="/TypeScript-start/assets/js/14.78c1c5c1.js"><link rel="prefetch" href="/TypeScript-start/assets/js/15.c3567fe6.js"><link rel="prefetch" href="/TypeScript-start/assets/js/16.4aeb08a9.js"><link rel="prefetch" href="/TypeScript-start/assets/js/17.fdb3f4c7.js"><link rel="prefetch" href="/TypeScript-start/assets/js/18.692fb1b3.js"><link rel="prefetch" href="/TypeScript-start/assets/js/19.e952de6f.js"><link rel="prefetch" href="/TypeScript-start/assets/js/20.09c0dcd2.js"><link rel="prefetch" href="/TypeScript-start/assets/js/21.86376a28.js"><link rel="prefetch" href="/TypeScript-start/assets/js/22.80f6e141.js"><link rel="prefetch" href="/TypeScript-start/assets/js/23.17982b5e.js"><link rel="prefetch" href="/TypeScript-start/assets/js/25.e6a5098b.js"><link rel="prefetch" href="/TypeScript-start/assets/js/3.9bd3bee2.js"><link rel="prefetch" href="/TypeScript-start/assets/js/4.89af05e7.js"><link rel="prefetch" href="/TypeScript-start/assets/js/5.3c9ad928.js"><link rel="prefetch" href="/TypeScript-start/assets/js/6.532e51b2.js"><link rel="prefetch" href="/TypeScript-start/assets/js/7.3f4e4ba5.js"><link rel="prefetch" href="/TypeScript-start/assets/js/8.8f5f24da.js"><link rel="prefetch" href="/TypeScript-start/assets/js/9.e7eec1bb.js">
+    <link rel="stylesheet" href="/TypeScript-start/assets/css/0.styles.eec4ae75.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/TypeScript-start/zh/" class="home-link router-link-active"><!----> <span class="site-name">TypeScript-start</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/TypeScript-start/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><a href="/TypeScript-start/zh/config/" class="nav-link">
+  配置
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="链接" class="dropdown-title"><span class="title">链接</span> <span class="arrow down"></span></button> <button type="button" aria-label="链接" class="mobile-dropdown-title"><span class="title">链接</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="http://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript官网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.tslang.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript中文网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.tslang.cn/docs/home.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript中文网文档
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/Microsoft/TypeScript" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/Sogrey/TypeScript-start" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/TypeScript-start/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><a href="/TypeScript-start/zh/config/" class="nav-link">
+  配置
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="链接" class="dropdown-title"><span class="title">链接</span> <span class="arrow down"></span></button> <button type="button" aria-label="链接" class="mobile-dropdown-title"><span class="title">链接</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="http://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript官网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.tslang.cn/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript中文网
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://www.tslang.cn/docs/home.html" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript中文网文档
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://github.com/Microsoft/TypeScript" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  TypeScript github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <a href="https://github.com/Sogrey/TypeScript-start" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>快速入门</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>TypeScript基础</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/TypeScript-start/zh/guide/02-data-type.html" class="sidebar-link">02 TypeScript 基础数据类型</a></li><li><a href="/TypeScript-start/zh/guide/03-function.html" class="sidebar-link">03 TypeScript 函数</a></li><li><a href="/TypeScript-start/zh/guide/04-class.html" class="sidebar-link">04 TypeScript中的类</a></li><li><a href="/TypeScript-start/zh/guide/05-interface.html" class="sidebar-link">05 TypeScript中的接口</a></li><li><a href="/TypeScript-start/zh/guide/06-genericity.html" class="sidebar-link">06 TypeScript中的泛型</a></li><li><a href="/TypeScript-start/zh/guide/07-modules.html" class="sidebar-link">07 TypeScript中的模块化</a></li><li><a href="/TypeScript-start/zh/guide/08-namespace.html" class="sidebar-link">08 命名空间</a></li><li><a href="/TypeScript-start/zh/guide/09-Decorator.html" aria-current="page" class="active sidebar-link">09 装饰器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#装饰器的概念" class="sidebar-link">装饰器的概念</a></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#类装饰器" class="sidebar-link">类装饰器</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#普通装饰器" class="sidebar-link">普通装饰器</a></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#装饰器工厂" class="sidebar-link">装饰器工厂</a></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#装饰器重载构造函数" class="sidebar-link">装饰器重载构造函数</a></li></ul></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#属性装饰器" class="sidebar-link">属性装饰器</a></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#方法装饰器" class="sidebar-link">方法装饰器</a></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#方法参数装饰器" class="sidebar-link">方法参数装饰器</a></li><li class="sidebar-sub-header"><a href="/TypeScript-start/zh/guide/09-Decorator.html#各个装饰器执行顺序" class="sidebar-link">各个装饰器执行顺序</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>其他</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_09-装饰器"><a href="#_09-装饰器" class="header-anchor">#</a> 09 装饰器</h1> <h2 id="装饰器的概念"><a href="#装饰器的概念" class="header-anchor">#</a> 装饰器的概念</h2> <p>装饰器是一种特殊类型的声明，它能够被附加到类声明、方法、属性或者参数上，可以修改类的行为。</p> <p>通俗讲，装饰器就是一个方法，可以注入到类、方法、属性上来扩展类、属性、方法和参数的功能。</p> <p>常见装饰器有：类装饰器、属性装饰器、方法装饰器、参数装饰器</p> <p>装饰器的写法：普通装饰器（无法传参）、装饰器工厂（可传参）</p> <p>装饰器是过去几年中js最大成就之一，已是ES7的标准特征之一。</p> <h2 id="类装饰器"><a href="#类装饰器" class="header-anchor">#</a> 类装饰器</h2> <p>类装饰器在类声明之前被声明（紧靠着类声明，类似与Java中的注解）。类装饰器应用于类构造函数，可以用来监视、修改或者替换类定义。传入一个参数。</p> <h3 id="普通装饰器"><a href="#普通装饰器" class="header-anchor">#</a> 普通装饰器</h3> <p>首先看一个普通装饰器的例子：</p> <div class="language-ts extra-class"><pre class="language-ts"><code>
+<span class="token comment">//装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logClazz</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+@logClazz
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在页面控制台看到输出：</p> <div class="language- extra-class"><pre class="language-text"><code>ƒ HttpClient() {
+    }
+</code></pre></div><p>其中装饰器的参数<code>params</code>就是当前类<code>HttpClient</code>。既然已经能拿到类的实例，我们为他扩展方法：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">//装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logClazz</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//params 就是当前类</span>
+    params<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>apiUrl <span class="token operator">=</span> <span class="token string">&quot;https://sogrey.top&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>创建一个类的实例：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span>apiUrl<span class="token punctuation">)</span><span class="token comment">//https://sogrey.top</span>
+</code></pre></div><p>果然能拿到刚刚扩展的属性<code>apiUrl</code>。</p> <p>同样可以扩展类的函数，你可以自己试一试。</p> <h3 id="装饰器工厂"><a href="#装饰器工厂" class="header-anchor">#</a> 装饰器工厂</h3> <p>看完普通装饰器再看看装饰器工厂：</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">function</span> <span class="token function">logClazz</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//此时的target就是当前类</span>
+
+        target<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>apiUrl <span class="token operator">=</span> params<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">logClazz</span><span class="token punctuation">(</span><span class="token string">'https://sogrey.top/api'</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>输出了：</p> <div class="language- extra-class"><pre class="language-text"><code>http
+ƒ HttpClient() {
+    }
+</code></pre></div><p>类的属性、方法的扩展与前面基本雷同。</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span>apiUrl<span class="token punctuation">)</span><span class="token comment">//https://sogrey.top/api</span>
+</code></pre></div><h3 id="装饰器重载构造函数"><a href="#装饰器重载构造函数" class="header-anchor">#</a> 装饰器重载构造函数</h3> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">function</span> <span class="token function">logClazz</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">class</span> <span class="token class-name"><span class="token keyword">extends</span></span> params<span class="token punctuation">{</span><span class="token comment">//重载构造函数</span>
+       apiUrl<span class="token operator">:</span><span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">&quot;url 被修改&quot;</span><span class="token punctuation">;</span><span class="token comment">//重载属性</span>
+
+       <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token comment">//重载函数</span>
+           <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">现在的URL：</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token keyword">this</span><span class="token punctuation">.</span>apiUrl<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+@logClazz
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    apiUrl<span class="token operator">:</span><span class="token builtin">string</span><span class="token operator">|</span><span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">this</span><span class="token punctuation">.</span>apiUrl <span class="token operator">=</span> <span class="token string">&quot;url&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>apiUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="属性装饰器"><a href="#属性装饰器" class="header-anchor">#</a> 属性装饰器</h2> <p>属性装饰器接受两个参数：</p> <ol><li>对于静态成员来说类的构造函数，对于实例成员是类的原型对象</li> <li>成员的名字</li></ol> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">//类装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logClazz</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//此时的target就是当前类        </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//属性装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logProterty</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+   <span class="token keyword">return</span> <span class="token keyword">function</span><span class="token punctuation">(</span>target<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">,</span>attr<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//当前类</span>
+      <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>attr<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//类的属性名</span>
+
+      target<span class="token punctuation">[</span>attr<span class="token punctuation">]</span> <span class="token operator">=</span> params<span class="token punctuation">;</span><span class="token comment">//修改类target的属性attr值为params的值</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">logClazz</span><span class="token punctuation">(</span><span class="token string">'/getUser'</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    @<span class="token function">logProterty</span><span class="token punctuation">(</span><span class="token string">'https://sogrey.top/api'</span><span class="token punctuation">)</span>
+    url<span class="token operator">:</span><span class="token builtin">string</span><span class="token operator">|</span><span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token punctuation">}</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/*
+运行输出：
+{getData: ƒ, constructor: ƒ}
+url
+/getUser
+ƒ HttpClient() {
+    }
+
+*/</span>
+
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//https://sogrey.top/api</span>
+</code></pre></div><h2 id="方法装饰器"><a href="#方法装饰器" class="header-anchor">#</a> 方法装饰器</h2> <p>方法装饰器会被应用到方法的属性描述符上，可以用来监视、修改或者替换方法的定义。</p> <p>方法装饰器在运行时传入三个参数：</p> <ol><li>对于静态成员来说类的构造函数，对于实例成员是类的原型对象</li> <li>成员的名字</li> <li>成员的属性描述符</li></ol> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">//方法装饰器  扩展</span>
+<span class="token keyword">function</span> <span class="token keyword">get</span><span class="token punctuation">(</span>params<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">,</span>methodName<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">,</span>desc<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//当前类</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>methodName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//方法名</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>desc<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//方法描述符</span>
+
+        <span class="token comment">//</span>
+
+        <span class="token comment">//扩展</span>
+        target<span class="token punctuation">.</span>url <span class="token operator">=</span> <span class="token string">&quot;扩展的 URL&quot;</span><span class="token punctuation">;</span>
+        target<span class="token punctuation">.</span><span class="token function-variable function">run</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;扩展的方法&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    url<span class="token operator">:</span><span class="token builtin">string</span><span class="token operator">|</span><span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    httpHost<span class="token operator">:</span><span class="token builtin">string</span><span class="token operator">|</span><span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+    @<span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'https://sogrey.top/api'</span><span class="token punctuation">)</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>httpHost<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+{getData: ƒ, constructor: ƒ}
+getData
+{writable: true, enumerable: true, configurable: true, value: ƒ}
+*/</span>
+
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//扩展的 URL</span>
+http<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//扩展的 URL</span>
+</code></pre></div><p>修改装饰器方法：把装饰器方法里面传入的所有参数改为string类型</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">//方法装饰器 修改</span>
+<span class="token keyword">function</span> <span class="token keyword">get</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//params 装饰器传入参数</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> methodName<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> desc<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//当前类</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>methodName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//方法名</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>desc<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//方法描述符</span>
+
+        <span class="token comment">//1. 保存当前方法</span>
+        <span class="token keyword">var</span> oMethod <span class="token operator">=</span> desc<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+
+        desc<span class="token punctuation">.</span><span class="token function-variable function">value</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            args <span class="token operator">=</span> args<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token function">String</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token function">oMethod</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    url<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+    @<span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">'https://sogrey.top/api'</span><span class="token punctuation">)</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;这是getData输出的&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+{getData: ƒ, constructor: ƒ}
+getData
+{writable: true, enumerable: true, configurable: true, value: ƒ}
+*/</span>
+
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//扩展的 URL</span>
+http<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//扩展的 URL</span>
+
+http<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token string">&quot;ABS&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+[&quot;123&quot;, &quot;ABS&quot;]
+[&quot;123&quot;, &quot;ABS&quot;]
+这是getData输出的
+*/</span>
+</code></pre></div><h2 id="方法参数装饰器"><a href="#方法参数装饰器" class="header-anchor">#</a> 方法参数装饰器</h2> <p>参数装饰器表达式会在运行时当做函数被调用，可以使用参数装饰器味蕾的原型增加一些元素数据，传入下列三个参数：</p> <ol><li>对于静态成员来说类的构造函数，对于实例成员是类的原型对象</li> <li>方法名</li> <li>参数在函数参数列表中的索引</li></ol> <div class="language-ts extra-class"><pre class="language-ts"><code>
+<span class="token keyword">function</span> <span class="token function">logParams</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> methodName<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> paramsIndex<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//装饰器传入参数</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//当前类</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>methodName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//方法名</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>paramsIndex<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//参数索引</span>
+
+        <span class="token comment">//扩展属性</span>
+        target<span class="token punctuation">.</span>apiUrl <span class="token operator">=</span> <span class="token string">'https://sogrey.top/api'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    url<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span>@<span class="token function">logParams</span><span class="token punctuation">(</span><span class="token string">'uuid'</span><span class="token punctuation">)</span> uuid<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>uuid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> http<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+http<span class="token punctuation">.</span><span class="token function">getData</span><span class="token punctuation">(</span><span class="token number">123456</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+uuid
+{getData: ƒ, constructor: ƒ}
+getData
+0
+123456
+*/</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>http<span class="token punctuation">.</span>apiUrl<span class="token punctuation">)</span><span class="token comment">//https://sogrey.top/api</span>
+</code></pre></div><h2 id="各个装饰器执行顺序"><a href="#各个装饰器执行顺序" class="header-anchor">#</a> 各个装饰器执行顺序</h2> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">//类装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logClazz1</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;类装饰器1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">logClazz2</span><span class="token punctuation">(</span>params<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;类装饰器2&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//属性装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logAttr</span><span class="token punctuation">(</span>params<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> attrName<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;属性装饰器&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//方法装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logMethod</span><span class="token punctuation">(</span>params<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> methodName<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> desc<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;方法装饰器&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//参数装饰器</span>
+<span class="token keyword">function</span> <span class="token function">logParams1</span><span class="token punctuation">(</span>params<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> methodName<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> desc<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;参数装饰器1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">logParams2</span><span class="token punctuation">(</span>params<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>target<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> methodName<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> desc<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;参数装饰器2&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">logClazz1</span><span class="token punctuation">(</span><span class="token string">'类装饰器'</span><span class="token punctuation">)</span>
+@<span class="token function">logClazz2</span><span class="token punctuation">(</span><span class="token string">'类装饰器'</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">HttpClient</span> <span class="token punctuation">{</span>
+    @<span class="token function">logAttr</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    url<span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token keyword">undefined</span><span class="token punctuation">;</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+    @<span class="token function">logMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;getData&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">setData</span><span class="token punctuation">(</span>@<span class="token function">logParams1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> attr1<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">,</span>@<span class="token function">logParams2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> attr2<span class="token operator">:</span><span class="token builtin">any</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HttpClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+http<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span><span class="token string">'123'</span><span class="token punctuation">)</span>
+<span class="token comment">/*
+
+属性装饰器
+方法装饰器
+参数装饰器2
+参数装饰器1
+类装饰器2
+类装饰器1
+*/</span>
+</code></pre></div><p>由此可见：</p> <div class="language- extra-class"><pre class="language-text"><code>属性装饰器&gt;方法装饰器&gt;方法参数装饰器&gt;类装饰器
+</code></pre></div><p>如果有多个同类装饰器，先执行后一个。</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Sogrey/TypeScript-start/edit/master/source/zh/guide/09-Decorator.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">上次更新:</span> <span class="time">2020-3-14 1:59:43 ├F10: AM┤</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/TypeScript-start/zh/guide/08-namespace.html" class="prev">
+        08 命名空间
+      </a></span> <span class="next"><a href="/TypeScript-start/zh/guide/other-tutorial.html">
+        其他学习库
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/TypeScript-start/assets/js/app.2929ee68.js" defer></script><script src="/TypeScript-start/assets/js/2.b792d9f1.js" defer></script><script src="/TypeScript-start/assets/js/24.4ffa99ee.js" defer></script>
+  </body>
+</html>
