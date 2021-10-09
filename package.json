@@ -26,7 +26,10 @@
     "lodash": ">=4.17.21",
     "lodash.template": ">=4.5.0",
     "minimist": ">=1.2.5",
-    "serialize-javascript": ">=6.0.0"
+    "serialize-javascript": ">=6.0.0",
+    "url-parse": ">=1.5.2",
+    "nth-check": ">=2.0.1",
+    "prismjs": ">=1.25.0"
   },
   "bugs": {
     "url": "https://github.com/Sogrey/TypeScript-start/issues"
